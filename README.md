@@ -1,7 +1,7 @@
 SoundCloud_Downloader
 =====================
 
-To Dowload Soundcloud tracks:
+To Download Soundcloud tracks:
 python sc-downloader.py https://soundcloud.com/zhu/faded
 
 ====================
