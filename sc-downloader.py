@@ -22,8 +22,7 @@ class SoundCloudClient(object):
         else:
             url = action
 
-        # EXEs packages with PyInstaller has a problem finding cacerts.txt. One way to avoid this 
-        # is to use verify=False
+
         return requests.get(url, verify=False, stream=stream, params=params)
 
 
@@ -68,7 +67,7 @@ def download_track(client, track, output_dir):
                 # The comma at the end of line is important, to stop the 'print' command from printing an additional new line
                 print u'\rDownloading track id={}, {:.1f}%, {}/s   '.format(
                                                                             track['id'],
-                                                                            f.tell() * 100 / content_length, 
+                                                                            f.tell() * 100 / content_length,
                                                                             humanize.naturalsize(download_speed)),
 
     os.rename(downloaded_track, audio_track)
@@ -80,13 +79,13 @@ def main(url, output_dir='.', client_id='b45b1aa10f1ac2941910a7f0d10f8e28'):
     client = SoundCloudClient(client_id)
     print u'Reading URL...'
     response = client.request('resolve', url=url).json()
-    
+
     if 'tracks' in response: # a playlist
         print u'Playlist has {} tracks'.format(len(response['tracks']))
-        
+
         title = response['title']
         title = normalize(title)
-        
+
         output_dir = os.path.join(output_dir, title)
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
