@@ -54,7 +54,6 @@ def download_track(client, track, output_dir):
             f.write(chunk)
             f.flush()
 
-            # Calculate download speed
             now = time.time()
             try:
                 download_speed = (CHUNK_SIZE)  / (now - time_before)
@@ -62,9 +61,7 @@ def download_track(client, track, output_dir):
                 pass
             time_before = now
 
-            if i % 2 == 0: # Print progress after
-                # \r used to return the cursor to beginning of line, so I can write progress on a single line.
-                # The comma at the end of line is important, to stop the 'print' command from printing an additional new line
+            if i % 2 == 0:
                 print u'\rDownloading track id={}, {:.1f}%, {}/s   '.format(
                                                                             track['id'],
                                                                             f.tell() * 100 / content_length,
@@ -74,7 +71,7 @@ def download_track(client, track, output_dir):
 
 
 @argh.arg('-o', '--output-dir', help='Output directory')
-def main(url, output_dir='.', client_id='b45b1aa10f1ac2941910a7f0d10f8e28'):
+def main(url, output_dir='.', client_id='8cc1ad31682003359858bcea08162fea'):
     '''Download the given track/playlist'''
     client = SoundCloudClient(client_id)
     print u'Reading URL...'
